@@ -3,13 +3,13 @@ import { ICar } from '../interfaces/ICar';
 import MongoModel from './Mongo.model';
 
 const carsSchema = new Schema<ICar>({
-  model: { type: String, required: true },
-  year: { type: Number, required: true },
-  color: { type: String, required: true },
+  model: String,
+  year: Number,
+  color: String,
   status: Boolean,
-  buyValue: { type: Number, required: true },
-  doorsQty: { type: Number, required: true },
-  seatsQty: { type: Number, required: true },
+  buyValue: Number,
+  doorsQty: Number,
+  seatsQty: Number,
 });
 
 export default class CarModel extends MongoModel<ICar> {

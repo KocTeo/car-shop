@@ -1,7 +1,8 @@
 import { FilterQuery, isValidObjectId, Model, UpdateQuery } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
 
-const idInvalidMessage = 'ID inválido';
+const error = new Error();
+error.name = 'InvalidMongoId';
 
 abstract class MongoModel<T> implements IModel<T> {
   protected _model: Model<T>;
@@ -24,7 +25,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async readOne(id: string): Promise<T | null> {
     if (!isValidObjectId(id)) {
-      throw new Error(idInvalidMessage);
+      throw error;
     }
 
     const vehicle = await this._model.findOne({ id });
@@ -34,7 +35,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async update(id: string, obj: T): Promise<T | null> {
     if (!isValidObjectId(id)) {
-      throw new Error(idInvalidMessage);
+      throw error;
     }
 
     const vehicle = await this._model.findOneAndUpdate(
@@ -48,7 +49,7 @@ abstract class MongoModel<T> implements IModel<T> {
 
   public async delete(id: string): Promise<T | null> {
     if (!isValidObjectId(id)) {
-      throw new Error(idInvalidMessage);
+      throw error;
     }
 
     const vehicle = await this._model.findOneAndDelete({ id });
