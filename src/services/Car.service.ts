@@ -1,1 +1,46 @@
-export default class CarService {}
+import { ICar } from '../interfaces/ICar';
+import { IService } from '../interfaces/IService';
+import CarModel from '../models/Car.model';
+import validations from './Validations.service';
+
+export default class CarService implements IService<ICar> {
+  protected _model: CarModel;
+
+  constructor(model = new CarModel()) {
+    this._model = model;
+  }
+
+  public async create(obj: ICar): Promise<ICar> {
+    const car = validations.validateBody(obj);
+
+    const createdCar = await this._model.create(car);
+
+    return createdCar;
+  }
+
+  public async read(): Promise<ICar[]> {
+    const cars = await this._model.read();
+
+    return cars;
+  }
+
+  public async readOne(id: string): Promise<ICar | null> {
+    const car = await this._model.readOne(id);
+
+    return car;
+  }
+
+  public async update(id: string, obj: ICar): Promise<ICar | null> {
+    const car = validations.validateBody(obj);
+
+    const updatedCar = await this._model.update(id, car);
+
+    return updatedCar;
+  }
+
+  public async delete(id: string): Promise<ICar | null> {
+    const deletedCar = await this._model.delete(id);
+
+    return deletedCar;
+  }
+}
