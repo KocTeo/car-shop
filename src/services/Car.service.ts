@@ -37,6 +37,9 @@ export default class CarService implements IService<ICar> {
   }
 
   public async update(id: string, obj: ICar): Promise<ICar | null> {
+    const exist = await this._model.readOne(id);
+    validations.checkIfExists(exist);
+    
     const car = validations.validateBody(obj);
 
     const updatedCar = await this._model.update(id, car);

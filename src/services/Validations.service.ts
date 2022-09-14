@@ -22,6 +22,14 @@ const validations = {
 
     return value as ICar;
   },
+
+  checkIfExists: (exist: ICar | null) => {
+    if (!exist) {
+      const error = new Error();
+      error.name = 'NotFoundObject';
+      throw error;
+    }
+  },
 };
 
 export default validations;
