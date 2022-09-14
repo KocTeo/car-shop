@@ -15,7 +15,10 @@ const validations = {
 
     const { error, value } = bodySchema.validate(data);
     
-    if (error) throw error;
+    if (error) {
+      error.name = 'ValidationError';
+      throw error;
+    }
 
     return value as ICar;
   },
