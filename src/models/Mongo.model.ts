@@ -1,4 +1,4 @@
-import { isValidObjectId, Model } from 'mongoose';
+import { FilterQuery, isValidObjectId, Model, UpdateQuery } from 'mongoose';
 import { IModel } from '../interfaces/IModel';
 
 const idInvalidMessage = 'ID inválido';
@@ -37,7 +37,11 @@ abstract class MongoModel<T> implements IModel<T> {
       throw new Error(idInvalidMessage);
     }
 
-    const vehicle = await this._model.findOneAndUpdate({ id }, obj);
+    const vehicle = await this._model.findOneAndUpdate(
+      { id } as FilterQuery<T>,
+      { ...obj } as UpdateQuery<T>,
+      { new: true },
+    );
 
     return vehicle;
   }
