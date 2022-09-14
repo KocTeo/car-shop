@@ -48,6 +48,9 @@ export default class CarService implements IService<ICar> {
   }
 
   public async delete(id: string): Promise<ICar | null> {
+    const exist = await this._model.readOne(id);
+    validations.checkIfExists(exist);
+    
     const deletedCar = await this._model.delete(id);
 
     return deletedCar;
