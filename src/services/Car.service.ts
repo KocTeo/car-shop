@@ -1,12 +1,12 @@
 import { ICar } from '../interfaces/ICar';
+import { IModel } from '../interfaces/IModel';
 import { IService } from '../interfaces/IService';
-import CarModel from '../models/Car.model';
 import validations from './Validations.service';
 
 export default class CarService implements IService<ICar> {
-  protected _model: CarModel;
+  protected _model: IModel<ICar>;
 
-  constructor(model = new CarModel()) {
+  constructor(model: IModel<ICar>) {
     this._model = model;
   }
 
