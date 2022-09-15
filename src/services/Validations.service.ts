@@ -24,19 +24,18 @@ const validations = {
     return value as ICar;
   },
 
-  validateMotorcycleBody(data: IMotorcycle) {
+  async validateMotorcycleBody(data: IMotorcycle) {
     const bodySchema = Joi.object({
       model: Joi.string().min(3).required(),
       year: Joi.number().min(1900).max(2022).required(),
       color: Joi.string().min(3).required(),
       buyValue: Joi.number().required(),
       status: Joi.string(),
-      category: Joi.string().required(),
-      engineCapacity: Joi.number().max(2500).required(),
-    });
+      category: Joi.string().valid('Street', 'Custom', 'Trail').required(),
+      engineCapacity: Joi.number().max(2500).min(1).required() });
 
     const { error, value } = bodySchema.validate(data);
-    
+
     if (error) {
       error.name = 'ValidationError';
       throw error;

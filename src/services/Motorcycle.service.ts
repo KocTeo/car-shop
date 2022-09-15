@@ -11,7 +11,7 @@ export default class MotorcycleService implements IService<IMotorcycle> {
   }
 
   public async create(obj: IMotorcycle): Promise<IMotorcycle> {
-    const motorcycle = validations.validateMotorcycleBody(obj);
+    const motorcycle = await validations.validateMotorcycleBody(obj);
 
     const createdMotorcycle = await this._model.create(motorcycle);
 
@@ -39,7 +39,7 @@ export default class MotorcycleService implements IService<IMotorcycle> {
     const exist = await this._model.readOne(id);
     validations.checkIfExists(exist);
     
-    const motorcycle = validations.validateMotorcycleBody(obj);
+    const motorcycle = await validations.validateMotorcycleBody(obj);
 
     const updatedMotorcycle = await this._model.update(id, motorcycle);
 
