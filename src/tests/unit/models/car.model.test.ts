@@ -2,9 +2,8 @@ import * as sinon from 'sinon';
 import chai from 'chai';
 const { expect } = chai;
 import mocks from '../../mocks/car.mock';
-import { Model, ObjectId } from 'mongoose';
+import { Model } from 'mongoose';
 import CarModel from '../../../models/Car.model';
-import { ICar } from '../../../interfaces/ICar';
 
 const carModel = new CarModel();
 
