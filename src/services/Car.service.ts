@@ -26,7 +26,8 @@ export default class CarService implements IService<ICar> {
 
   public async readOne(id: string): Promise<ICar | null> {
     const car = await this._model.readOne(id);
-
+    console.log(car);
+    
     if (!car) {
       const error = new Error();
       error.name = 'NotFoundObject';

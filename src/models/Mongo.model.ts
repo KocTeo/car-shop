@@ -28,7 +28,7 @@ abstract class MongoModel<T> implements IModel<T> {
       throw error;
     }
 
-    const vehicle = await this._model.findOne({ id });
+    const vehicle = await this._model.findOne({ _id: id });
 
     return vehicle;
   }
