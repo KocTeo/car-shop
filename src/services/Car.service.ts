@@ -11,7 +11,7 @@ export default class CarService implements IService<ICar> {
   }
 
   public async create(obj: ICar): Promise<ICar> {
-    const car = validations.validateBody(obj);
+    const car = validations.validateCarBody(obj);
 
     const createdCar = await this._model.create(car);
 
@@ -40,7 +40,7 @@ export default class CarService implements IService<ICar> {
     const exist = await this._model.readOne(id);
     validations.checkIfExists(exist);
     
-    const car = validations.validateBody(obj);
+    const car = validations.validateCarBody(obj);
 
     const updatedCar = await this._model.update(id, car);
 
