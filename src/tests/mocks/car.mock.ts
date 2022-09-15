@@ -103,3 +103,17 @@ const cars = [
     doorsQty: 4
   }
 ];
+
+export default {
+  validCar,
+  car,
+  carWithoutModel,
+  carWithoutYear,
+  carWithoutColor,
+  carWithoutBuyValue,
+  carWithoutSeatsQty,
+  carWithoutDoorsQty,
+  carSeatsQtyLess2,
+  carDoorsQtyLess2,
+  cars,
+}
