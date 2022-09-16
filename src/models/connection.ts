@@ -1,13 +1,10 @@
 import mongoose from 'mongoose';
-import 'dotenv/config';
 
-const mongoDatabaseURI: string = process.env.MONGO_URI
+const connectToDatabase = (mongoURL: string) => {
+  mongoose.connect(mongoURL);
 
-const connectToDatabase = () => {
-  mongoose.connect(mongoDatabaseURI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-}
+  const db = mongoose.connection;
+  db.once('open', () => console.log('Conectado ao banco'));
+};
 
 export default connectToDatabase;
